@@ -3,10 +3,11 @@
 namespace App\Swagger\Auth;
 
 use OpenApi\Annotations as OA;
+
 /**
  * @OA\Post(
  *     path="/api/register",
- *     tags={"Register"},
+ *     tags={"Authentication"},
  *     summary="Register a new user with email and password.",
  *     description="Register a new user with email and password.",
  *     @OA\RequestBody(
@@ -36,6 +37,4 @@ use OpenApi\Annotations as OA;
  *     )
  * )
  */
-class Register {
-
-}
+class Register {}

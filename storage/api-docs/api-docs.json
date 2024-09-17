@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API Documentation 54545",
+        "title": "API Documentation",
         "version": "1.0.0"
     },
     "paths": {
@@ -12,7 +12,7 @@
                 ],
                 "summary": "User login",
                 "description": "Log in a user with email and password, returning a token.",
-                "operationId": "3904ca5a0c4ccd01bc3a7b9b88953e64",
+                "operationId": "5847554fd76bec4686100fc608774f34",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -79,68 +79,14 @@
                 }
             }
         },
-        "/api/user": {
-            "get": {
-                "tags": [
-                    "Authentication"
-                ],
-                "summary": "Get authenticated user",
-                "description": "Retrieve the currently authenticated user.",
-                "operationId": "bb8e5e02867d381d1483f7e7209862c1",
-                "responses": {
-                    "200": {
-                        "description": "Authenticated user details",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "example": 1
-                                        },
-                                        "email": {
-                                            "type": "string",
-                                            "format": "email",
-                                            "example": "user@example.com"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
         "/api/logout": {
             "post": {
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Logout user",
+                "summary": "Logout",
                 "description": "Logout the authenticated user and invalidate the token.",
-                "operationId": "fd968054bfb7f956481b84afa8cee662",
+                "operationId": "f854fdd8c9003a77ec42605fb35a1f2d",
                 "responses": {
                     "200": {
                         "description": "Logout successful",
@@ -185,7 +131,7 @@
         "/api/register": {
             "post": {
                 "tags": [
-                    "Register"
+                    "Authentication"
                 ],
                 "summary": "Register a new user with email and password.",
                 "description": "Register a new user with email and password.",
@@ -252,6 +198,74 @@
                     }
                 }
             }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Get authenticated user profile",
+                "description": "Retrieve the currently authenticated user.",
+                "operationId": "a512715f5e87decd3263188b0ad14c50",
+                "responses": {
+                    "200": {
+                        "description": "Authenticated user details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "John Doe"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "format": "email",
+                                            "example": "user@example.com"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2021-01-01T00:00:00Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2021-01-01T00:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -269,10 +283,6 @@
         {
             "name": "Authentication",
             "description": "Authentication"
-        },
-        {
-            "name": "Register",
-            "description": "Register"
         }
     ]
 }

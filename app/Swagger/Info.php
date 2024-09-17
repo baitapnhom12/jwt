@@ -6,7 +6,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Info(
- *    title="API Documentation 54545",
+ *    title="API Documentation",
  *    version="1.0.0",
  * ),
  * @OA\SecurityScheme(
