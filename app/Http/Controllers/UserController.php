@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -12,36 +12,28 @@ class UserController extends Controller
     {
         User::create($request->all());
         return response()->json([
-            "status" => true
-        ]);
+            "message" => true
+        ], 200);
     }
     public function login(Request $request)
     {
         if ($token = Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return response()->json([
-                'access_token' => $token,
-                'token_type'   => 'bearer',
-                'expires_in'   => Auth::factory()->getTTL(),
-            ]);
-        }
-        else{
+            return $this->responseWithToken($token);
+        } else {
             return response()->json([
                 'access_token' => "fail error",
-            ]);
+            ], 401);
         }
     }
+
     protected function responseWithToken(string $token)
     {
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'bearer',
             'expires_in'   => Auth::factory()->getTTL(),
-        ]);
+        ], 200);
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function user(Request $request)
     {
         return $request->user();
@@ -50,7 +42,7 @@ class UserController extends Controller
     {
         Auth::logout();
         return response()->json([
-            "status" => true
-        ]);
+            "message" => true
+        ], 200);
     }
 }
